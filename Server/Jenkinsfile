@@ -47,6 +47,8 @@ spec:
             // build docker image
             sh """
             cd LoL-MBTI/Server
+            pwd
+            ls
             docker build -t \$PROJECT_NAME .
             """
           }
