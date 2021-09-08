@@ -37,7 +37,7 @@ spec:
         steps {
           container('git') {
             // clone source code
-            sh "git clone \$PROJECT_URL"
+            sh "git clone -b server-prod \$PROJECT_URL"
           }
         }
       } 
@@ -47,8 +47,6 @@ spec:
             // build docker image
             sh """
             cd LoL-MBTI/Server
-            pwd
-            ls
             docker build -t \$PROJECT_NAME .
             """
           }
