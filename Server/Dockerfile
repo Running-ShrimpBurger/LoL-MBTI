@@ -11,6 +11,6 @@ COPY . .
 
 RUN go build -o ./server .
 
-EXPOSE 191030
+EXPOSE 7014
 
 CMD ["./server"]
