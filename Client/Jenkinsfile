@@ -38,8 +38,7 @@ spec:
           container('git') {
             // clone source code
             sh """
-            git clone \$PROJECT_URL
-            git checkout client-prod
+            git clone -b client-prod \$PROJECT_URL
             """
           }
         }
