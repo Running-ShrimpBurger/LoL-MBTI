@@ -37,7 +37,10 @@ spec:
         steps {
           container('git') {
             // clone source code
-            sh "git clone \$PROJECT_URL"
+            sh """
+            git clone \$PROJECT_URL
+            git checkout client-prod
+            """
           }
         }
       } 
