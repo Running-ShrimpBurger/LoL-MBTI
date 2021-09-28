@@ -7,16 +7,16 @@ import (
 	"github.com/Lol-MBTI/secret"
 )
 
-type postgreHandler struct {
+type mysqlHandler struct {
 	db *sql.DB
 }
 
-func (p *postgreHandler) Close() {
-	p.db.Close()
+func (m *mysqlHandler) Close() {
+	m.db.Close()
 }
 
-func newPostgreHandler() DBHandler {
-	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s", secret.GetDBHost(), secret.GetDBPort(), secret.GetDBUser(), secret.GetDBPassword(), "postgres")
+func newMysqlHandler() DBHandler {
+	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s", secret.GetDBHost(), secret.GetDBPort(), secret.GetDBUser(), secret.GetDBPassword(), "mysql")
 
 	database, err := sql.Open("postgres", dsn)
 	if err != nil {
@@ -36,5 +36,5 @@ func newPostgreHandler() DBHandler {
 			PRIMARY KEY (id)
 		);`)
 	statement.Exec()
-	return &postgreHandler{database}
+	return &mysqlHandler{database}
 }

@@ -5,5 +5,5 @@ type DBHandler interface {
 }
 
 func NewDBHandler() DBHandler {
-	return newPostgreHandler()
+	return newMysqlHandler()
 }
