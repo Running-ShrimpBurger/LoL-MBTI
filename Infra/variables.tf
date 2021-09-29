@@ -34,6 +34,12 @@ variable "vpc_db_subnets" {
   default     = ["10.0.101.0/24", "10.0.102.0/24"]
 }
 
+variable "subnet_group_name" {
+  description = "Subnet group name for database subnets"
+  type = string
+  default = "mbti-subnet-group"
+}
+
 variable "db_username" {
   description = "Database administrator username"
   type = string

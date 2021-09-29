@@ -31,14 +31,18 @@ module "db" {
 
   name     = "mbtidb"
   username = var.db_username
-  password = var.db_username
+  password = var.db_password
   port     = "3306"
 
-  iam_database_authentication_enabled = true
-
+  multi_az = true
   vpc_security_group_ids = [module.security_group.security_group_id]
-  subnet_ids = [module.vpc.database_subnets[0], module.vpc.database_subnets[1]]
+  subnet_ids = module.vpc.database_subnets
+
+  db_subnet_group_name = var.vpc_name
 
   create_db_option_group = false
   create_db_parameter_group = false
+  create_db_subnet_group = false
+
+  publicly_accessible = true
 }
