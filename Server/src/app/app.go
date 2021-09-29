@@ -5,7 +5,6 @@ import (
 
 	"github.com/Lol-MBTI/model"
 	"github.com/go-openapi/runtime/middleware"
-	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/unrolled/render"
 	"github.com/urfave/negroni"
@@ -22,14 +21,29 @@ func (a *AppHandler) Close() {
 	a.db.Close()
 }
 
+func CORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+
+		// Set headers
+		w.Header().Set("Access-Control-Allow-Headers", "*")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "*")
+		w.Header().Set("Allow", "*")
+
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		// Next
+		next.ServeHTTP(w, r)
+		return
+	})
+}
+
 func MakeHandler() *AppHandler {
 	r := mux.NewRouter()
-	cors := handlers.CORS(
-		handlers.AllowedHeaders([]string{"*"}),
-		handlers.AllowedOrigins([]string{"*"}),
-		handlers.AllowCredentials(),
-	)
-	r.Use(cors)
+	r.Use(CORS)
 
 	neg := negroni.Classic()
 	neg.UseHandler(r)
