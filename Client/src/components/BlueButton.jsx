@@ -1,30 +1,66 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const BlueButton = ({ onClick, text }) => {
+const BlueButton = ({ isChecked, onClick, text }) => {
   return (
-    <ButtonBorder>
-      <Button onClick={onClick}>{text}</Button>
+    <ButtonBorder onClick={() => onClick()}>
+      <Border isChecked={isChecked} />
+      <Button>{text}</Button>
     </ButtonBorder>
   );
 };
 
 export default BlueButton;
 const ButtonBorder = styled.div`
+  cursor: pointer;
   display: flex;
-  padding: 5px;
-  width: 256px;
+  margin: 10px;
+  width: 80%;
+  margin-bottom: 20px;
+  position: relative;
+`;
+const Border = styled.div`
+  position: absolute;
+  top: -7px;
+  left: 7px;
+  width: 100%;
+  height: 100%;
   border: 1px solid #ffecc9;
-  margin-bottom: 14px;
-  clip-path: polygon(0% 0%, 200% 0%, 0% 200%);
+  transition: all 0.3s;
+  ${(props) =>
+    props.isChecked &&
+    `top: 0px;
+    left: 0px;`}
+  &:hover,
+  &:active {
+    animation-name: border;
+    animation-duration: 1s;
+    top: 0px;
+    left: 0px;
+  }
+  @keyframes border {
+    0% {
+      top: -7px;
+      left: 7px;
+    }
+    30% {
+      top: -9px;
+      left: 9px;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+    }
+  }
 `;
 const Button = styled.div`
-  cursor: pointer;
+ 
   width: 100%;
   color: #ffffff;
+  text-align: center;
   font-weight: bold;
   font-size: 18px;
-  padding: 15px 0;
+  padding: 15px;
   display: flex;
   font-weight: bold;
   align-items: center;
