@@ -8,11 +8,11 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/Lol-MBTI/app"
 )
 
 func main() {
-	r := mux.NewRouter()
+	r := app.MakeHandler()
 	server := &http.Server{
 		Addr:         ":7014",
 		Handler:      r,

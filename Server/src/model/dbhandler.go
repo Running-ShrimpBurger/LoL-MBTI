@@ -17,7 +17,7 @@ func (m *mysqlHandler) Close() {
 }
 
 func newMysqlHandler() DBHandler {
-	dsn := fmt.Sprintf("%s:%s@%s(%s:%d)/", secret.GetDBUser(), secret.GetDBPassword(), "tcp", secret.GetDBHost(), secret.GetDBPort())
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/mbti-db", secret.GetDBUser(), secret.GetDBPassword(), secret.GetDBHost(), secret.GetDBPort())
 
 	database, err := sql.Open("mysql", dsn)
 	if err != nil {
@@ -30,38 +30,13 @@ func newMysqlHandler() DBHandler {
 		panic(err)
 	}
 
-	_, err = database.Exec("CREATE DATABASE test")
-	if err != nil {
-		panic(err)
-	}
-
-	_, err = database.Exec("USE test")
-	if err != nil {
-		panic(err)
-	}
-
-	_, err = database.Exec("CREATE TABLE example ( id integer, data varchar(32) )")
-	if err != nil {
-		panic(err)
-	}
-
-	champStatement, _ := database.Prepare(
-		`CREATE TABLE IF NOT EXISTS champions (
-			id INT NOT NULL AUTO_INGREMENT,
-			name VARCHAR(30),
+	statisticsStatement, _ := database.Prepare(
+		`CREATE TABLE IF NOT EXISTS statistics (
+			id INT NOT NULL AUTO_INCREMENT,
+			line VARCHAR(30),
 			mbti VARCHAR(4),
-			CONSTRAINT champions_PK PRIMARY KEY(id)
+			CONSTRAINT statistics_PK PRIMARY KEY(id)
 		);`)
-	compatibilityStatement, _ := database.Prepare(
-		`CREATE TABLE IF NOT EXISTS compatibility (
-			id INT NOT NULL AUTO_INGREMENT,
-			mbti VARCHAR(4),
-			good VARCHAR(4),
-			bad VARCHAR(4),
-			CONSTRAINT champions_PK PRIMARY KEY(id)
-		);`)
-
-	champStatement.Exec()
-	compatibilityStatement.Exec()
+	statisticsStatement.Exec()
 	return &mysqlHandler{database}
 }
