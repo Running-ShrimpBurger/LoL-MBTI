@@ -93,6 +93,7 @@ func (a *AppHandler) GetMBTIHandler(rw http.ResponseWriter, r *http.Request) {
 	badMbti := data.GetBad(mbti)
 
 	var res data.Result
+	res.Mbti = mbti
 	for _, champion := range champs {
 		if champion.Line == answer.Line {
 			if champion.MBTI == mbti {

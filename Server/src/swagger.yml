@@ -53,6 +53,8 @@ definitions:
     properties:
       name:
         type: "string"
+      mbti:
+        type: "string"
       good_champ:
         type: "string"
       bad_champ:
