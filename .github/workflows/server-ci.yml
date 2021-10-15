@@ -18,12 +18,6 @@ jobs:
       with:
         go-version: 1.17
 
-    - name: Check pwd
-      run: pwd
-
-    - name: ls
-      run: ls
-
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:

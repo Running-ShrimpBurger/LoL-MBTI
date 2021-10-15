@@ -3,7 +3,6 @@ package model
 import (
 	"database/sql"
 
-	// "github.com/Lol-MBTI/secret"
 	_ "github.com/go-sql-driver/mysql"
 )
 

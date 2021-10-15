@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/Lol-MBTI/data"
-	"github.com/Lol-MBTI/model"
+	"github.com/LoL-MBTI/data"
+	"github.com/LoL-MBTI/model"
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/gorilla/mux"
 	"github.com/unrolled/render"

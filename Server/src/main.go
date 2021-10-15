@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/Lol-MBTI/app"
+	"github.com/LoL-MBTI/app"
 )
 
 func main() {

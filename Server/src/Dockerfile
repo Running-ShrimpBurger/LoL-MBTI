@@ -9,6 +9,10 @@ WORKDIR /app
 
 COPY . .
 
+RUN go mod init github.com/LoL-MBTI
+
+RUN go mod tidy
+
 RUN go build -o ./server .
 
 EXPOSE 7014
