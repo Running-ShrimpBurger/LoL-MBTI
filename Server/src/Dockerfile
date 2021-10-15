@@ -9,6 +9,10 @@ WORKDIR /app
 
 COPY . .
 
+RUN ls
+
+RUN pwd
+
 RUN go mod download
 
 RUN go build -o ./server .
