@@ -2,9 +2,8 @@ package model
 
 import (
 	"database/sql"
-	"fmt"
 
-	"github.com/Lol-MBTI/secret"
+	// "github.com/Lol-MBTI/secret"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -17,26 +16,26 @@ func (m *mysqlHandler) Close() {
 }
 
 func newMysqlHandler() DBHandler {
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/mbti-db", secret.GetDBUser(), secret.GetDBPassword(), secret.GetDBHost(), secret.GetDBPort())
+	// dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/mbti-db", secret.GetDBUser(), secret.GetDBPassword(), secret.GetDBHost(), secret.GetDBPort())
 
-	database, err := sql.Open("mysql", dsn)
-	if err != nil {
-		panic(err)
-	}
-	defer database.Close()
+	// database, err := sql.Open("mysql", dsn)
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// defer database.Close()
 
-	err = database.Ping()
-	if err != nil {
-		panic(err)
-	}
+	// err = database.Ping()
+	// if err != nil {
+	// 	panic(err)
+	// }
 
-	statisticsStatement, _ := database.Prepare(
-		`CREATE TABLE IF NOT EXISTS statistics (
-			id INT NOT NULL AUTO_INCREMENT,
-			line VARCHAR(30),
-			mbti VARCHAR(4),
-			CONSTRAINT statistics_PK PRIMARY KEY(id)
-		);`)
-	statisticsStatement.Exec()
-	return &mysqlHandler{database}
+	// statisticsStatement, _ := database.Prepare(
+	// 	`CREATE TABLE IF NOT EXISTS statistics (
+	// 		id INT NOT NULL AUTO_INCREMENT,
+	// 		line VARCHAR(30),
+	// 		mbti VARCHAR(4),
+	// 		CONSTRAINT statistics_PK PRIMARY KEY(id)
+	// 	);`)
+	// statisticsStatement.Exec()
+	return &mysqlHandler{}
 }
