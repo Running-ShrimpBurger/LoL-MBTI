@@ -5,11 +5,11 @@ FROM node:lts-alpine
 WORKDIR /app
 
 # install app dependencies
-COPY package.json ./
+COPY Client/package.json ./
 
 RUN yarn
 
-COPY . ./
+COPY Client ./
 
 RUN yarn build
 
