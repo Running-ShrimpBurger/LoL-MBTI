@@ -7,13 +7,9 @@ ENV GO111MODULE=on \
 
 WORKDIR /app
 
-COPY . .
+COPY ./Server/src .
 
 RUN ls
-
-RUN pwd
-
-RUN go mod download
 
 RUN go build -o ./server .
 
