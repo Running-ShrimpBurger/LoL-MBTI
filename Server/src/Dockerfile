@@ -9,8 +9,6 @@ WORKDIR /app
 
 COPY ./Server/src .
 
-RUN ls
-
 RUN go build -o ./server .
 
 EXPOSE 7014
