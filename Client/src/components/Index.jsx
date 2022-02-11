@@ -1,14 +1,18 @@
 import React from 'react';
-import styled from 'styled-components';
-const circles = [];
-for (let i = 0; i < 12; i++) {
-  circles.push(i);
-}
-const Index = ({ index }) => {
+import styled from "@emotion/styled";
+const circles = Array.from(new Array(12), (_, index) => index);
+
+const Index = ({ index, setIndex }) => {
   return (
     <Container>
-      {circles.map((circle) => (
-        <Circle key={circle} isDone={circle <= index} />
+      {circles.map((circle, i) => (
+        <Circle
+          onClick={() =>  {
+            if(circle <= index)  setIndex(i);
+          }}
+          key={circle}
+          isDone={circle <= index}
+        />
       ))}
       <Line />
     </Container>
@@ -22,8 +26,9 @@ const Container = styled.div`
   width: 300px;
   align-items: center;
   justify-content: space-between;
-  margin-top: 30px;
+  margin: 30px 0 ;
   position: relative;
+  
 `;
 
 const Circle = styled.div`

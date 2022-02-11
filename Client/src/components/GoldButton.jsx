@@ -1,11 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from "@emotion/styled";
 
 const GoldButton = ({ isChecked, onClick, text }) => {
   return (
-    <ButtonBorder onClick={() => onClick()}>
+    <ButtonBorder onClick={onClick}>
       <Border isChecked={isChecked} />
-      <Button>{text}</Button>
+      <Button isChecked={isChecked}>{text}</Button>
     </ButtonBorder>
   );
 };
@@ -29,11 +29,7 @@ const Border = styled.div`
   width: 100%;
   height: 100%;
   border: 1px solid #ffecc9;
-  transition: all 0.3s;
-  ${(props) =>
-    props.isChecked &&
-    `top: 0px;
-    left: 0px;`}
+
   &:hover,
   &:active {
     animation-name: border;
@@ -41,6 +37,10 @@ const Border = styled.div`
     top: 0px;
     left: 0px;
   }
+  ${(props) =>
+    props.isChecked &&
+    `top: 0px;
+    left: 0px;`}
   @keyframes border {
     0% {
       top: -7px;
@@ -57,7 +57,6 @@ const Border = styled.div`
   }
 `;
 const Button = styled.div`
-
   width: 100%;
   color: #ffffff;
   font-weight: bold;
@@ -69,7 +68,9 @@ const Button = styled.div`
   text-align: center;
   justify-content: center;
   background: #d0a85c;
-  /* animation-name: poly;
+  transition: all 0.3s;
+  ${(props) =>
+    props.isChecked && `background-color: #a37d35;`}/* animation-name: poly;
   @keyframes poly {
     0% {
       clip-path: polygon(100% 100%, 100% 100%, 100% 100%);
